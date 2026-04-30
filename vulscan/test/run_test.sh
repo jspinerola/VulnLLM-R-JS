@@ -10,7 +10,6 @@ n=1
 test_data="./datasets/test/function_level/ ./datasets/test/repo_level/"
 language="c python java"
 specified_model=""
-reasoning_effort=""
 
 usage() {
   echo "Usage: $0 [options]"
@@ -24,12 +23,11 @@ usage() {
   echo "  -d PATH      Test data path (default: $test_data)"
   echo "  -l LANGS     Languages (default: $language)"
   echo "  -M MODEL     Specify model to run (default: run all models)"
-  echo "  -e EFFORT    Reasoning effort (e.g., low, medium, high)"
   echo "  -h           Show this help message"
   exit 1
 }
 
-while getopts "o:r:b:t:g:m:n:d:l:M:e:h" opt; do
+while getopts "o:r:b:t:g:m:n:d:l:M:h" opt; do
   case $opt in
     o) output_dir="$OPTARG" ;;
     r) requests_per_minute="$OPTARG" ;;
@@ -40,7 +38,6 @@ while getopts "o:r:b:t:g:m:n:d:l:M:e:h" opt; do
     d) test_data="$OPTARG" ;;
     l) language="$OPTARG" ;;
     M) specified_model="$OPTARG" ;;
-    e) reasoning_effort="$OPTARG" ;;
     h) usage ;;
     *) usage ;;
   esac
@@ -67,13 +64,8 @@ models=(
     "deepseek-ai/DeepSeek-R1-Distill-Qwen-32B"
     "together-deepseek-reasoner"
     "gpt-4o"
-    "gpt-5.3"
-    "gpt-5.4"
-    "gpt-5.3-codex"
-    "gpt-5.2-codex"
     "o3-mini"
     "claude-3-7-sonnet-20250219"
-    "claude-opus-4-6"
     "gemini/gemini-3-flash-preview"
 )
 commercial_models=(
@@ -81,13 +73,8 @@ commercial_models=(
   "gpt-4o"
   "gpt-4o-2024-11-20"
   "gpt-5"
-  "gpt-5.3"
-  "gpt-5.4"
-  "gpt-5.3-codex"
-  "gpt-5.2-codex"
   "o3-mini"
   "claude-3-7-sonnet-20250219"
-  "claude-opus-4-6"
   "deepseek/deepseek-reasoner"
 )
 is_commercial_model() {
@@ -111,12 +98,6 @@ else
   run_models=("${models[@]}")
 fi
 
-# Build reasoning effort flag
-reasoning_effort_flag=""
-if [[ -n "$reasoning_effort" ]]; then
-  reasoning_effort_flag="--reasoning_effort $reasoning_effort"
-fi
-
 # Iterate over models
 for model in "${run_models[@]}"; do
   echo "Running model: $model"
@@ -132,8 +113,7 @@ for model in "${run_models[@]}"; do
         --requests_per_minute "$requests_per_minute" \
         --save --use_cot --use_policy \
         --batch_size "$batch_size" --together_deepseek \
-        --max_tokens "$max_tokens" --random_cwe --n "$n" \
-        $reasoning_effort_flag
+        --max_tokens "$max_tokens" --random_cwe --n "$n"
     else
       python test.py \
         --output_dir "$output_dir" \
@@ -143,8 +123,7 @@ for model in "${run_models[@]}"; do
         --requests_per_minute "$requests_per_minute" \
         --save --use_cot --use_policy \
         --batch_size "$batch_size" \
-        --max_tokens "$max_tokens" --random_cwe --n "$n" \
-        $reasoning_effort_flag
+        --max_tokens "$max_tokens" --random_cwe --n "$n"
     fi
   else
     python test.py \
@@ -155,8 +134,7 @@ for model in "${run_models[@]}"; do
       --requests_per_minute "$requests_per_minute" \
       --save --use_cot --use_policy \
       --batch_size "$batch_size" --tp "$tp" --vllm \
-      --max_tokens "$max_tokens" --random_cwe --n "$n" \
-      $reasoning_effort_flag
+      --max_tokens "$max_tokens" --random_cwe --n "$n"
   fi
   # Wait before the next iteration
   echo "Waiting for GPU to release resources..."
