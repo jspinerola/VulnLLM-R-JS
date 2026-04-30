@@ -1,0 +1,29 @@
+
+### REVISIONS.txt - VulnLLM-R JavaScript Support Revisions
+
+This file documents the minimal changes made to the VulnLLM-R project to support the evaluation of the JavaScript SFT model.
+
+1. DATASET MODIFICATIONS:
+   - Path: datasets/test/function_level/javascript/
+   - Action: Created 44 JSON files grouped by CWE from the original js_vulnllm_dataset.jsonl.
+   - Logic: Used 10% test split (seed=42) and added a 'RELATED_CWE' field containing 3 random distractors per sample to match the paper's "Agent Policy" methodology.
+   - Submission: Created 'my_contributions/js_vulnllm_test_with_distractors.jsonl'.
+
+2. SOURCE CODE MODIFICATIONS:
+   - File: vulscan/utils/cwes.py
+   - Action: 
+     - Added 'javascript' to 'function_level_test_cwes' with all 78 unique CWE IDs found in the dataset.
+     - Added 'javascript' to 'function_level_train_cwes'.
+     - Added 'javascript' to 'function_level_ood_cwes' (initialized as an empty list to prevent KeyErrors during evaluation).
+
+3. UTILITY SCRIPTS ADDED:
+   - File: merge_js_model.py
+     - Purpose: Merges the LoRA adapter weights in 'my_contributions/final_js_vulnllm_adapter' with the 'Virtue-AI-HUB/VulnLLM-R-7B' base model. Necessary for high-throughput evaluation using vLLM on the HPRC.
+   - File: run_all_evals.sh (SLURM template)
+     - Purpose: Automates baseline reproduction, zero-shot JS testing, and regression testing on the HPRC.
+
+4. TEMPORARY SCRIPTS (FOR CLEANUP):
+   - analyze_js_data.py
+   - create_js_test_set.py
+   - create_js_test_set_final.py
+   - finalize_js_data.py

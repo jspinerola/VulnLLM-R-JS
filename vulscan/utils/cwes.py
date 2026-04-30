@@ -122,6 +122,25 @@ function_level_test_cwes = {
 function_level_ood_cwes = {
     "c": list(set(function_level_test_cwes["c"]).difference(function_level_train_cwes["c"])),
     "python": list(set(function_level_test_cwes["python"]).difference(function_level_train_cwes["python"])),
+    "javascript": [],
+}
+repo_level_test_cwes = {
+    "java": ["CWE-20", "CWE-22", "CWE-74", "CWE-79", "CWE-89", "CWE-200", "CWE-284", "CWE-287", "CWE-295", "CWE-327",
+             "CWE-345", "CWE-352", "CWE-400", "CWE-434", "CWE-444", "CWE-502", "CWE-522", "CWE-611", "CWE-668", "CWE-770",
+             "CWE-787", "CWE-835", "CWE-862", "CWE-863", "CWE-918", "CWE-1021"]
+}
+java_ood_cwes = {
+    "java": list(set(repo_level_test_cwes["java"]).union(function_level_test_cwes["java"]))
+}
+# fmt: on
+
+remove_idx = ["121", "408"]
+", "CWE-526", "CWE-601",
+             "CWE-617", "CWE-667", "CWE-681", "CWE-772", "CWE-775", "CWE-835"],
+}
+function_level_ood_cwes = {
+    "c": list(set(function_level_test_cwes["c"]).difference(function_level_train_cwes["c"])),
+    "python": list(set(function_level_test_cwes["python"]).difference(function_level_train_cwes["python"])),
 }
 repo_level_test_cwes = {
     "java": ["CWE-20", "CWE-22", "CWE-74", "CWE-79", "CWE-89", "CWE-200", "CWE-284", "CWE-287", "CWE-295", "CWE-327",
