@@ -12,6 +12,7 @@
 
 # 1. SETUP ENVIRONMENT (Placeholders for TAMU HPRC)
 module load GCC/12.3.0 CUDA/12.1.1 Anaconda3/2023.09-0
+module load WebProxy
 source activate vulnscan
 
 export PYTHONPATH=$PYTHONPATH:$(pwd)
