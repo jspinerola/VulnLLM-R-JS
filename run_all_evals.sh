@@ -11,9 +11,13 @@
 #SBATCH --output=results/hprc_eval_%j.log
 
 # 1. SETUP ENVIRONMENT (Placeholders for TAMU HPRC)
+# 1. SETUP ENVIRONMENT (Placeholders for TAMU HPRC)
 module load GCC/12.3.0 CUDA/12.1.1 Anaconda3/2023.09-0
+
+# Properly initialize conda for non-interactive bash scripts
+eval "$(conda shell.bash hook)"
+conda activate vulnscan
 module load WebProxy
-source activate vulnscan
 
 export PYTHONPATH=$PYTHONPATH:$(pwd)
 
