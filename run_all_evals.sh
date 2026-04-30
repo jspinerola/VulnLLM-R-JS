@@ -1,14 +1,13 @@
 #!/bin/bash
 # HPRC Master Evaluation Script for VulnLLM-R & JS-SFT
-# NOTE: Update placeholders (partitions, account info) based on your TAMU HPRC quota.
-
 #SBATCH --job-name=vulnllm_eval
+#SBATCH --partition=gpu          
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
 #SBATCH --cpus-per-task=32
 #SBATCH --mem=128G
-#SBATCH --gres=gpu:2
-#SBATCH --time=04:00:00
+#SBATCH --gres=gpu:a30:2         
+#SBATCH --time=06:00:00
 #SBATCH --output=results/hprc_eval_%j.log
 
 # 1. SETUP ENVIRONMENT (Placeholders for TAMU HPRC)
