@@ -42,8 +42,10 @@ python -m vulscan.test.test \
     --dataset_path ./datasets/test/function_level/ \
     --language javascript \
     --model UCSB-SURFI/VulnLLM-R-7B \
-    --filter_long_sequence 12000 \
-    --save --use_cot --use_policy --vllm --tp 2 --batch_size 16
+    --save --use_cot --random_cwe \
+    --vllm --tp 2 --batch_size 4 \
+    --max_tokens 8192 \
+    --filter_long_sequence 10000
 
 echo "--- Job 3: JavaScript SFT Evaluation (Tuned Model) ---"
 python -m vulscan.test.test \
@@ -51,8 +53,10 @@ python -m vulscan.test.test \
     --dataset_path ./datasets/test/function_level/ \
     --language javascript \
     --model models/VulnLLM-R-7B-JS \
-    --filter_long_sequence 12000 \
-    --save --use_cot --use_policy --vllm --tp 2 --batch_size 16
+    --save --use_cot --random_cwe \
+    --vllm --tp 2 --batch_size 4 \
+    --max_tokens 8192 \
+    --filter_long_sequence 10000
 
 # echo "--- Job 4: Regression Testing (Tuned Model on C/Py/Java) ---"
 # python -m vulscan.test.test \
