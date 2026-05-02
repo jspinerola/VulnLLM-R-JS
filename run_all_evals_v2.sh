@@ -42,7 +42,7 @@ python -m vulscan.test.test \
     --dataset_path ./datasets/test/function_level/ \
     --language javascript \
     --model UCSB-SURFI/VulnLLM-R-7B \
-    --save --use_cot --random_cwe \
+    --save --use_cot --use_policy \
     --vllm --tp 2 --batch_size 4 \
     --max_tokens 8192 \
     --filter_long_sequence 10000
@@ -53,7 +53,7 @@ python -m vulscan.test.test \
     --dataset_path ./datasets/test/function_level/ \
     --language javascript \
     --model models/VulnLLM-R-7B-JS \
-    --save --use_cot --random_cwe \
+    --save --use_cot --use_policy \
     --vllm --tp 2 --batch_size 4 \
     --max_tokens 8192 \
     --filter_long_sequence 10000
