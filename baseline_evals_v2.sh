@@ -21,18 +21,18 @@ module load WebProxy
 
 export PYTHONPATH=$PYTHONPATH:$(pwd)
 
-echo "--- Job 1: Baseline Reproduction ---"
-python -m vulscan.test.test \
-    --output_dir results/v2/baseline_verify \
-    --dataset_path ./datasets/test/function_level/ \
-    --language c python java \
-    --model UCSB-SURFI/VulnLLM-R-7B \
-    --save \
-    --use_cot \
-    --batch_size 4 \
-    --vllm --tp 2 \
-    --max_tokens 8192 \
-    --random_cwe 
+# echo "--- Job 1: Baseline Reproduction ---"
+# python -m vulscan.test.test \
+#     --output_dir results/v2/baseline_verify \
+#     --dataset_path ./datasets/test/function_level/ \
+#     --language c python java \
+#     --model UCSB-SURFI/VulnLLM-R-7B \
+#     --save \
+#     --use_cot \
+#     --batch_size 4 \
+#     --vllm --tp 2 \
+#     --max_tokens 8192 \
+#     --random_cwe 
 
 echo "--- Job 2: Zero-Shot JavaScript (Original Model) ---"
 python -m vulscan.test.test \
