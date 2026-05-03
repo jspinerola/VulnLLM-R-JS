@@ -31,7 +31,7 @@ sft_sys_prompt = (
 )
 
 # 1. LOCAL PATH DEFINITIONS
-DATASET_PATH = "./my_contributions/js_vulnllm_dataset_clean.jsonl"
+DATASET_PATH = "./my_contributions/js_train_clean.jsonl"
 OUTPUT_DIR = "./vulnllm_js_checkpoints_v2"
 METRICS_FILE = "./training_metrics_v2.csv"
 os.makedirs(OUTPUT_DIR, exist_ok=True)
