@@ -6,8 +6,8 @@ import os
 
 # Paths relative to project root
 BASE_MODEL = "Virtue-AI-HUB/VulnLLM-R-7B"
-ADAPTER_PATH = "my_contributions/final_js_vulnllm_adapter"
-OUTPUT_PATH = "models/VulnLLM-R-7B-JS"
+ADAPTER_PATH = "./final_js_vulnllm_adapter"
+OUTPUT_PATH = "models/VulnLLM-R-7B-JS-V2"
 
 def merge_model():
     print(f"🚀 Loading base model: {BASE_MODEL}")
@@ -18,6 +18,9 @@ def merge_model():
         device_map="auto",
         trust_remote_code=True
     )
+
+    print(f"📏 Resizing base model embeddings to {len(tokenizer)}...")
+    base_model.resize_token_embeddings(len(tokenizer))
 
     print(f"🔗 Loading adapter from: {ADAPTER_PATH}")
     model = PeftModel.from_pretrained(base_model, ADAPTER_PATH)
