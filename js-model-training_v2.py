@@ -6,7 +6,7 @@ from datasets import load_dataset
 from transformers import TrainerCallback
 from peft import LoraConfig, get_peft_model
 from trl import SFTTrainer, SFTConfig
-
+os.environ["WANDB_MODE"] = "disabled"
 # system prompt extracted from original model
 sft_sys_prompt = (
     "Your role as an assistant involves thoroughly exploring questions through a systematic long "
@@ -161,6 +161,7 @@ peft_config = LoraConfig(
 
 # 4. TRAINING ARGUMENTS (Using SFTConfig)
 training_args = TrainingArguments(
+    report_to="none",  
     output_dir=OUTPUT_DIR,
     per_device_train_batch_size=1,
     gradient_accumulation_steps=16,
