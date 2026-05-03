@@ -1,4 +1,3 @@
-
 import torch
 from peft import PeftModel
 from transformers import AutoModelForCausalLM, AutoTokenizer
@@ -10,15 +9,19 @@ ADAPTER_PATH = "./final_js_vulnllm_adapter"
 OUTPUT_PATH = "models/VulnLLM-R-7B-JS-V2"
 
 def merge_model():
+    print(f"🚀 Loading tokenizer from adapter path to get resized vocab...")
+    # Load from adapter path because it contains your 4 added tokens
+    tokenizer = AutoTokenizer.from_pretrained(ADAPTER_PATH)
+
     print(f"🚀 Loading base model: {BASE_MODEL}")
-    # Load in bfloat16 to match A30 hardware performance
     base_model = AutoModelForCausalLM.from_pretrained(
         BASE_MODEL,
         torch_dtype=torch.bfloat16,
-        device_map="auto",
+        device_map="cpu", # Use CPU for merging to save GPU for eval later
         trust_remote_code=True
     )
 
+    # --- CRITICAL FIX: The Size Mismatch ---
     print(f"📏 Resizing base model embeddings to {len(tokenizer)}...")
     base_model.resize_token_embeddings(len(tokenizer))
 
@@ -32,11 +35,10 @@ def merge_model():
     os.makedirs(OUTPUT_PATH, exist_ok=True)
     merged_model.save_pretrained(OUTPUT_PATH)
 
-    print("📄 Copying tokenizer...")
-    tokenizer = AutoTokenizer.from_pretrained(ADAPTER_PATH)
+    print("📄 Saving tokenizer...")
     tokenizer.save_pretrained(OUTPUT_PATH)
 
-    print("✅ Successfully created merged model for HPRC/vLLM!")
+    print(f"✅ Successfully created merged model at {OUTPUT_PATH}!")
 
 if __name__ == "__main__":
     merge_model()
