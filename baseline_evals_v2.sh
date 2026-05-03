@@ -37,7 +37,7 @@ export PYTHONPATH=$PYTHONPATH:$(pwd)
 echo "--- Job 2: Zero-Shot JavaScript (Original Model) ---"
 python -m vulscan.test.test \
   --output_dir results/v2/js_zeroshot \
-  --dataset_path ./datasets/test/function-level/ \
+  --dataset_path ./datasets/test/function_level/ \
   --language javascript \
   --model UCSB-SURFI/VulnLLM-R-7B \
   --requests_per_minute 1000 \
