@@ -175,7 +175,7 @@ training_args = TrainingArguments(
     num_train_epochs=3,
     warmup_ratio=0.1,
     lr_scheduler_type="cosine",
-    evaluation_strategy="no",
+    eval_strategy="no",
     load_best_model_at_end=False,
 )
 
