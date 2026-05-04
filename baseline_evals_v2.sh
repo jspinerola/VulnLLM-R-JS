@@ -34,12 +34,42 @@ export PYTHONPATH=$PYTHONPATH:$(pwd)
 #     --max_tokens 8192 \
 #     --random_cwe 
 
-echo "--- Job 2: Zero-Shot JavaScript (Original Model) ---"
+# echo "--- Job 2: Zero-Shot JavaScript (Original Model) ---"
+# python -m vulscan.test.test \
+#   --output_dir results/v2/js_zeroshot \
+#   --dataset_path ./datasets/test/function_level/ \
+#   --language javascript \
+#   --model UCSB-SURFI/VulnLLM-R-7B \
+#   --requests_per_minute 1000 \
+#   --save \
+#   --use_cot \
+#   --batch_size 4 \
+#   --tp 2 \
+#   --vllm \
+#   --max_tokens 8192 \
+#   --random_cwe
+
+echo "--- Job 3: JavaScript on JS Dataset ---"
 python -m vulscan.test.test \
-  --output_dir results/v2/js_zeroshot \
+  --output_dir results/v2/js_js_dataset \
   --dataset_path ./datasets/test/function_level/ \
   --language javascript \
-  --model UCSB-SURFI/VulnLLM-R-7B \
+  --model models/VulnLLM-R-7B-JS-V2 \
+  --requests_per_minute 1000 \
+  --save \
+  --use_cot \
+  --batch_size 4 \
+  --tp 2 \
+  --vllm \
+  --max_tokens 8192 \
+  --random_cwe
+
+echo "--- Job 4: JavaScript on OG Dataset (regression) ---"
+python -m vulscan.test.test \
+  --output_dir results/v2/js_og_regression \
+  --dataset_path ./datasets/test/function_level/ \
+  --language c python java \
+  --model models/VulnLLM-R-7B-JS-V2 \
   --requests_per_minute 1000 \
   --save \
   --use_cot \
