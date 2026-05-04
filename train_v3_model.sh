@@ -7,7 +7,7 @@
 #SBATCH --mem=128G
 #SBATCH --gres=gpu:a30:2         
 #SBATCH --time=06:00:00
-#SBATCH --output=results/training_v2_%j.log
+#SBATCH --output=results/training_v3_%j.log
 
 # 1. SETUP ENVIRONMENT (Placeholders for TAMU HPRC)
 module load GCC/12.3.0 CUDA/12.1.1 Anaconda3/2023.09-0

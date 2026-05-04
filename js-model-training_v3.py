@@ -32,8 +32,8 @@ sft_sys_prompt = (
 
 # 1. LOCAL PATH DEFINITIONS
 DATASET_PATH = "./my_contributions/js_train_clean.jsonl"
-OUTPUT_DIR = "./vulnllm_js_checkpoints_v2"
-METRICS_FILE = "./training_metrics_v2.csv"
+OUTPUT_DIR = "./vulnllm_js_checkpoints_v3"
+METRICS_FILE = "./training_metrics_v3.csv"
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 # 2. LOAD TOKENIZER AND BASE MODEL
@@ -212,7 +212,7 @@ trainer.train(resume_from_checkpoint=checkpoint)
 
 # 7. SAVE THE FINAL ADAPTER
 # <-- CHANGED: Removed BASE_DIR reliance for local HPC environment
-final_save_path = "./final_js_vulnllm_adapter"
+final_save_path = "./final_js_vulnllm_adapter_v3"
 trainer.model.save_pretrained(final_save_path)
 tokenizer.save_pretrained(final_save_path)
 print(f"✅ Training Complete! Final adapter safely stored at {final_save_path}")
