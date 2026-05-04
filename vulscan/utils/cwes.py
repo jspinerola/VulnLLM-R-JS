@@ -131,21 +131,26 @@ function_level_test_cwes = {
              "CWE-193", "CWE-252", "CWE-319", "CWE-327", "CWE-338", "CWE-369", "CWE-400", "CWE-476", "CWE-526", "CWE-601",
              "CWE-617", "CWE-667", "CWE-681", "CWE-772", "CWE-775", "CWE-835"],
     "javascript": [
-        "CWE-115", "CWE-116", "CWE-1188", "CWE-1321", "CWE-1333", "CWE-150", "CWE-178", "CWE-185", "CWE-190", "CWE-20",
-        "CWE-200", "CWE-212", "CWE-22", "CWE-23", "CWE-252", "CWE-269", "CWE-27", "CWE-272", "CWE-284", "CWE-285",
-        "CWE-287", "CWE-295", "CWE-310", "CWE-311", "CWE-319", "CWE-327", "CWE-330", "CWE-331", "CWE-338", "CWE-345",
-        "CWE-347", "CWE-352", "CWE-367", "CWE-384", "CWE-399", "CWE-400", "CWE-404", "CWE-416", "CWE-434", "CWE-444",
-        "CWE-471", "CWE-521", "CWE-522", "CWE-526", "CWE-59", "CWE-601", "CWE-613", "CWE-620", "CWE-639", "CWE-640",
-        "CWE-662", "CWE-665", "CWE-668", "CWE-670", "CWE-672", "CWE-674", "CWE-681", "CWE-697", "CWE-732", "CWE-74",
-        "CWE-754", "CWE-77", "CWE-770", "CWE-78", "CWE-787", "CWE-79", "CWE-835", "CWE-843", "CWE-88", "CWE-89",
-        "CWE-90", "CWE-909", "CWE-91", "CWE-913", "CWE-915", "CWE-917", "CWE-918", "CWE-922", "CWE-93", "CWE-94",
-        "NVD-CWE-Other", "NVD-CWE-noinfo"
+        "CWE-115", "CWE-116", "CWE-1188", "CWE-1236", "CWE-1321", "CWE-1333", 
+        "CWE-150", "CWE-178", "CWE-185", "CWE-190", "CWE-20", "CWE-200", "CWE-203", 
+        "CWE-212", "CWE-22", "CWE-23", "CWE-248", "CWE-252", "CWE-269", "CWE-27", 
+        "CWE-272", "CWE-284", "CWE-285", "CWE-287", "CWE-29", "CWE-295", "CWE-310", 
+        "CWE-311", "CWE-319", "CWE-327", "CWE-330", "CWE-331", "CWE-338", "CWE-345", 
+        "CWE-346", "CWE-347", "CWE-352", "CWE-354", "CWE-367", "CWE-384", "CWE-399", 
+        "CWE-400", "CWE-404", "CWE-416", "CWE-434", "CWE-436", "CWE-444", "CWE-471", 
+        "CWE-521", "CWE-522", "CWE-526", "CWE-532", "CWE-59", "CWE-601", "CWE-613", 
+        "CWE-620", "CWE-639", "CWE-640", "CWE-662", "CWE-665", "CWE-668", "CWE-670", 
+        "CWE-672", "CWE-674", "CWE-681", "CWE-697", "CWE-704", "CWE-706", "CWE-732", 
+        "CWE-74", "CWE-754", "CWE-755", "CWE-764", "CWE-77", "CWE-770", "CWE-78", 
+        "CWE-787", "CWE-79", "CWE-835", "CWE-843", "CWE-863", "CWE-88", "CWE-89", 
+        "CWE-90", "CWE-909", "CWE-91", "CWE-913", "CWE-915", "CWE-917", "CWE-918", 
+        "CWE-922", "CWE-93", "CWE-94", "NVD-CWE-Other", "NVD-CWE-noinfo"
     ]
 }
 function_level_ood_cwes = {
     "c": list(set(function_level_test_cwes["c"]).difference(function_level_train_cwes["c"])),
     "python": list(set(function_level_test_cwes["python"]).difference(function_level_train_cwes["python"])),
-    "javascript": [],
+    "javascript": function_level_test_cwes["javascript"],,
 }
 repo_level_test_cwes = {
     "java": ["CWE-20", "CWE-22", "CWE-74", "CWE-79", "CWE-89", "CWE-200", "CWE-284", "CWE-287", "CWE-295", "CWE-327",
