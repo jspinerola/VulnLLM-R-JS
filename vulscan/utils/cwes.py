@@ -150,7 +150,7 @@ function_level_test_cwes = {
 function_level_ood_cwes = {
     "c": list(set(function_level_test_cwes["c"]).difference(function_level_train_cwes["c"])),
     "python": list(set(function_level_test_cwes["python"]).difference(function_level_train_cwes["python"])),
-    "javascript": function_level_test_cwes["javascript"],,
+    "javascript": function_level_test_cwes["javascript"],
 }
 repo_level_test_cwes = {
     "java": ["CWE-20", "CWE-22", "CWE-74", "CWE-79", "CWE-89", "CWE-200", "CWE-284", "CWE-287", "CWE-295", "CWE-327",
